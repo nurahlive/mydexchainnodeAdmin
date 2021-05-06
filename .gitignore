@@ -1,3 +1,8 @@
 .idea
-sqladmin/
+test/
+test2/
 config/
+host/*
+testDev/
+okex/
+sqladmin/
