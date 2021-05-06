@@ -4,114 +4,11 @@
      require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/controller/database.php");
      require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/controller/helper.php");
      require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/controller/auth.php");
-     require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/controller/crons.php");
-     use config\themes,ndatabase\nmysql,helper\message,auth\nsession,crons\earning;
+     use config\themes,ndatabase\nmysql,helper\message,auth\nsession;
 
      class post  extends message {
-<<<<<<< HEAD
 
          public static function orderInfo(int $orderId){
-=======
-         public static  function referanceProc(int $referanceid, int $status=1){
-             // status 1  confirm  2 cancel
-             $db= new nmysql();
-             $refInfoSql = "select * from referenceEarnins where referenceId=:referenceId";
-             $refInfoArg = [
-                 "referenceId" => $referanceid
-             ];
-             $refInfo = $db->query($refInfoSql, "one", $refInfoArg);
-            // print_R($refInfo);
-
-              if($status==2){
-                  $sql="update referenceEarnins set status=:status,ConfirmedUser=:ConfirmedUser where referenceId=:referenceId";
-                  $arg=[
-                      "referenceId"=> $referanceid,
-                      "ConfirmedUser"=> intval($_SESSION['adid']),
-                      "status"=> $status
-                  ];
-                  if($db->update($sql,$arg)){
-                      return true;
-                  }else{
-                      return false;
-                  }
-              }
-             if($status==1) {
-
-
-                 $countSql="select * from wallets where userID=:userID and coinId=:coinId";
-                 $countArg=[
-                     "userID"=>$refInfo->mainUserId,
-                     "coinId"=>$refInfo->coinType
-                 ];
-
-                // print_r($db->databaseRecordCount($countSql,$countArg));
-
-                 if($db->databaseRecordCount($countSql,$countArg)>0){
-
-                     $earningArg = [
-                         "userID" => $refInfo->mainUserId,
-                         "coinId" => $refInfo->coinType,
-                         "decreaseAmount" => $refInfo->amount
-                     ];
-
-                 $earningSql = "update wallets set earningAmount=earningAmount+:decreaseAmount where userID=:userID and coinId=:coinId";
-                 if ($db->update($earningSql, $earningArg)) {
-                     $sql = "update referenceEarnins set status=:status,ConfirmedUser=:ConfirmedUser where referenceId=:referenceId";
-                     $arg = [
-                         "referenceId" => $referanceid,
-                         "ConfirmedUser" => intval($_SESSION['adid']),
-                         "status" => $status
-                     ];
-                     if ($db->update($sql, $arg)) {
-                         earning::transactionAdd($refInfo->mainUserId,$refInfo->coinType,$refInfo->amount,2,1);
-                         return true;
-                     } else {
-
-                         return false;
-                     }
-
-                 } else {
-
-                     return false;
-                 }
-             }else{
-                     //cüzdan tanımlanmadı ise;
-
-                      $insertSql="insert into wallets(coinId,userID,earningAmount,amount) values(:coinId,:userID,:earningAmount,:amount)";
-                      $insertArg=[
-                          "coinId"=>$refInfo->coinType,
-                          "userID"=>$refInfo->mainUserId,
-                          "earningAmount"=>$refInfo->amount,
-                          "amount"=>0
-                      ];
-                      if($db->insert($insertSql,$insertArg)){
-                          // durum değiştirme
-                          $sql = "update referenceEarnins set status=:status,ConfirmedUser=:ConfirmedUser where referenceId=:referenceId";
-                          $arg = [
-                              "referenceId" => $referanceid,
-                              "ConfirmedUser" => intval($_SESSION['adid']),
-                              "status" => $status
-                          ];
-                          if($db->update($sql,$arg)){
-                              earning::transactionAdd($refInfo->mainUserId,$refInfo->coinType,$refInfo->amount,2,1);
-                              return true;
-                          }else{
-                              return false;
-                          }
-                      }else{
-
-                          return false;
-                      }
-                 }
-
-
-
-             }
-
-
-         }
-         public static function onholdPackageCancel($packageId){
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
              $db= new nmysql();
              $orderSql="select * from orders where orderId=:orderId";
              $orderArg=["orderId"=>$orderId];

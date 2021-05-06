@@ -12,7 +12,6 @@ namespace crons{
              $sql="select * from noder where status='4' limit 0,10";
              $activeNoderData=$db->query($sql,"all");
 
-<<<<<<< HEAD
              foreach ($activeNoderData as $nodeline){
                  $getserver=self::getServer($nodeline->serverId);
                  $requestUrl="http://".trim($getserver->serverIp).":".$nodeline->port;
@@ -251,20 +250,6 @@ namespace crons{
          }
          public static function serviceFullInstalled($serviceId){
             if(self::serviceChangeStatus($serviceId,1)){
-=======
-        public static function transactionAdd($userid, $coin,$amount,$transactionType=1,$packetId=0,$status=1){
-            $db= new nmysql();
-            $sql="insert into transactions(userId,coinType,amount,transactionType,status,packetId) values(:userId,:coinType,:amount,:transactionType,:status,:packetId)";
-            $arg=[
-                "userId"=>$userid,
-                "coinType"=>$coin,
-                "amount"=>$amount,
-                "transactionType"=>$transactionType,
-                "packetId"=>$packetId,
-                "status"=>$status,
-            ];
-            if($db->insert($sql,$arg)){
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
                 return true;
             }else{
                 return false;
@@ -427,7 +412,6 @@ namespace crons{
             [port] => 0
             [status] => 0
 
-<<<<<<< HEAD
               * */
              foreach($onholdNode as $nodeLine){
                  // node  bilgilerini servisle cekme start;
@@ -439,107 +423,6 @@ namespace crons{
                      $onePrivateServer = self::getpivateOneServer();
 
                      $serverUseNodeCount = self::serverUseNodeCount($onePrivateServer->serverId);
-=======
-            return json_decode(json_encode($returnDate));
-        }
-        public static  function dailyEarnings(){
-            $db= new  nmysql();
-            foreach (self::usersActivePacketList() as $line) {
-                $runtime=false;
-               //print_R($line);
-
-
-                echo "\n ---------------  : ".$line->mPacketId ." Start ------------- \n ";
-                $zaman = self::dateDiff($line->startDate,date("Y-m-d H:i:s"));
-                $packetTime = date("H:i:s", strtotime($line->startDate));
-                $nowTime = date("H:i:s");
-
-                echo "\n ---------------  : ".$line->mPacketId ." Cron Çalışma Saati: $nowTime  ------------- \n ";
-                $packetSaatFarkı = strtotime($packetTime) - strtotime($nowTime);
-                   //   saat 22 den sonrasi için  start ;
-               // if($nowTime<21){// saat  21 den  kucuk ise sunucu zaman  kontrolu yapilacak. 9 ve 21 ne durumda
-
-                 if($nowTime<20){// saat  21 den  kucuk ise
-
-                if ($packetSaatFarkı < 1 and $zaman->time>0) {
-                    $runtime=true;
-                }
-                else{
-                    $runtime=false;
-                }
-                }else{
-                     $runtime=true;
-                }
-
-
-
-
-                //   saat 22 den sonrasi için ende ;
-
-                //if ($packetSaatFarkı < 1 and $zaman->time>0) {
-                if ($runtime) {
-                    echo "\n - ".$line->mPacketId ."  Zaman Farkı ok \n ";
-
-                if (self::packetLogCount($line->mPacketId) < $line->packageDay ) {
-                    echo "\n - ".$line->mPacketId ."   Log Count uyumlu \n ";
-                    if (self::packetDailyLogCount($line->mPacketId) === 0) {
-
-                        echo "\n - ".$line->mPacketId ."  Log Eklendi \n ";
-                        if (self::logWrite($line->mPacketId)) {
-                            // Paket Türüne göre  günlük kazançlar start;
-                            if($line->InterestType==1){
-                                $dailyEarling = (((100 + $line->totalInterest) / $line->packageDay) * $line->minInvestAmount) / 100;
-                            }
-                            if($line->InterestType==2){
-                                $dailyEarling= (($line->totalInterest/$line->packageDay)*$line->minInvestAmount)/ 100;
-                            }
-                            if($line->InterestType==3){
-                                $dailyEarling = 0;
-                            }
-                           // echo "paket id : $line->mPacketId  type  :$line->InterestType  Kazan: $dailyEarling \n ";
-
-                            // Paket Türüne göre  günlük kazançlar  ende;
-
-
-                            if (self::transactionAdd($line->userId, $line->coinType, $dailyEarling, 1,$line->mPacketId)) {
-                                if (self::earningAdd($line->userId, $line->coinType, $dailyEarling)) {
-
-                                    echo "\n - ".$line->mPacketId ."  earlink eklendi \n ";
-                                }
-                            } else {
-                                echo "\n - ".$line->mPacketId ."  transaction ekleme Hatasi \n ";
-
-                            }
-
-                            echo "\n - ".$line->mPacketId ."  loga Eklendi xxx \n ";
-
-                        } else {
-                            echo "\n - ".$line->mPacketId ."  loga Ekleme Hatası \n ";
-
-                        }// log yazma sonu
-                    }else{
-                        echo "\n - ".$line->mPacketId ."  Kazaç Önceden Eklenmiş \n ";
-                        //echo $line->mPacketId . " Kazanç eklenmiş \n";
-                    }
-
-                } else {
-                    self::packetTimeOut($line->mPacketId);
-                    echo "\n - ".$line->mPacketId ."  Paket Süresi Sona Ermiş \n ";
-                   // echo "paker süresi Sona Ermiş \n";
-                    // echo "packet süresi bitmiş  paketi bitmiş olarak işaretle";
-                }
-
-            }//saat farkına Bak
-                else {
-                    echo "\n  ".$line->mPacketId ." Saat Farkindan Dolayı Paket işlem Görmedi çalışmadı \n ";
-                }
-             /*else {
-                echo $line->mPacketId ."Saat Farkindan Dolayı Paket işlem Görmedi çalışmadı \n";
-            */
-
-                echo "\n ---------------  : ".$line->mPacketId ." ende ------------- \n ";
-            }
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
 
                      //print_R($onePrivateServer);
                      if(strlen(@$onePrivateServer->serverIp)>3){
