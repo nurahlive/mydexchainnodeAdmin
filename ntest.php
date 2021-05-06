@@ -3,7 +3,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "controller/contr
 require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "controller/data.php");
 use security\control,data\liste;
 control::loginControl();
-<<<<<<< HEAD
 
 $test=array(
 
@@ -23,20 +22,6 @@ exit();
 $zaman=nextdate(2,date("Y-m-d H:i:s"));
 exit();
 
-=======
-$nowTime = date("H:i:s");
-if($nowTime>12){
-    echo "saat büyük";
-}else{
-    echo "saat küçük";
-}
-echo "<br>saat  $nowTime";
-exit();
-
-echo liste::ipUsersCount('1','24');
-
-exit();
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
 echo "Zaman  :".  date("Y-m-d H:i:s");
 exit();
 print_R(liste::getAdmUserName(1));

@@ -226,47 +226,9 @@ $themePath=themes::themeBaseDirectory(). DIRECTORY_SEPARATOR.themes::themeActive
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-<<<<<<< HEAD
 
           <li class="nav-item">
             <a href="?productPackets" class="nav-link">
-=======
-        <?
-        /*
-           <li class="nav-item">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-         * */
-        ?>
-          <li class="nav-item">
-            <a href="?investPackets" class="nav-link">
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
               <i class="nav-icon fas fa-th"></i>
               <p>
                  Ürün Paketleri
@@ -274,17 +236,9 @@ $themePath=themes::themeBaseDirectory(). DIRECTORY_SEPARATOR.themes::themeActive
               </p>
             </a>
           </li>
-<<<<<<< HEAD
           <li class="nav-item">
             <a href="?servers" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
-=======
-          <?
-          /*
-           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
               <p>
                 Sunucular
                 <span class="right badge badge-danger">Server</span>
@@ -292,7 +246,6 @@ $themePath=themes::themeBaseDirectory(). DIRECTORY_SEPARATOR.themes::themeActive
             </a>
           </li>
 
-<<<<<<< HEAD
 
           <li class="nav-item">
             <a href="?masterTrakerPool" class="nav-link">
@@ -300,25 +253,10 @@ $themePath=themes::themeBaseDirectory(). DIRECTORY_SEPARATOR.themes::themeActive
               <p title="Özel sunucu Node Kurulumu">
                Master Pool Yönetimi
                 <span class="right badge badge-danger">Private</span>
-=======
-           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
               </p>
             </a>
           </li>
-<<<<<<< HEAD
 
-=======
-           * */
-          ?>
-
-          <!--   exchanges menu start ; -->
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
           <li class="nav-item">
             <a href="?manuelContainerSetup" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -348,30 +286,17 @@ $themePath=themes::themeBaseDirectory(). DIRECTORY_SEPARATOR.themes::themeActive
             </a>
           </li>
 
-<<<<<<< HEAD
           <li class="nav-item">
             <a href="?serviceList" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
-=======
-      <?
-      /*
-           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
               <p>
                 Servis Listesi
                 <span class="right badge badge-danger">Services</span>
               </p>
             </a>
           </li>
-<<<<<<< HEAD
 
 
-=======
-       * */
-      ?>
->>>>>>> b05cee1d97e6c0896ce44ecff90ed8d49ed7fdd3
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
