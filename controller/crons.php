@@ -24,7 +24,9 @@ namespace crons{
              $db=new nmysql();
              //and noder.status='3
              $sql="select * from noder,servers where noder.trackerKey is null and noder.servisId=servers.serverId and noder.status='3'";
+             echo "bb";
              foreach ($db->query($sql,"all") as $line){
+                 echo "aaa";
                  $requestUrl="http://".$line->serverIp.":".$line->port."/getTrackerKey/";
                  $getTrakerData=json_decode(self::getUrl($requestUrl));
                 // print_r($getTrakerData);
