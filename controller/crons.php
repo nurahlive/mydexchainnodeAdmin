@@ -96,9 +96,12 @@ namespace crons{
              return $db->query($sql,"one");
            }
 
-          public static function getTrakerNumber(){
-
-             return "5c41faf4706b11eb88ab06a281cead4eBRlScE8YEl";
+          public static function getTrakerNumber($servisId){
+             $db=new nmysql();
+             $sql="select * from services  where servisId=:servisId";
+             $arg=["servisId"=>$servisId];
+             return $db->query($sql,"one",$arg)->dexchainTrakeCode;
+             //return "5c41faf4706b11eb88ab06a281cead4eBRlScE8YEl";
           }
           public static function  getServer($serverId){
               $db = new nmysql();
@@ -113,6 +116,7 @@ namespace crons{
              $db= new nmysql();
              $sql="select * from noder where status='1' limit 0,5";
              $OnholdActiveNode=$db->query($sql,"all");
+
              // print_R($OnholdActiveNode);
              //exit();
              foreach ($OnholdActiveNode as $nodeline) {
@@ -121,6 +125,8 @@ namespace crons{
 
                  $poolApikey = trim($getPoolKey->poolApiKey);
                  $poolApiId = $getPoolKey->masterPoolId;
+                 //echo "dex code". self::getTrakerNumber($nodeline->servisId)."\n x";
+                 //exit();
 
                  //exit();s
                  print_R($getPoolKey);
