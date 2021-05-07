@@ -7,6 +7,39 @@ namespace crons{
     use np\nc;
 
     class  cronNoder{
+        public static function trakerKeyUpdate($noderId,$trakerKey){
+            $db = new nmysql();
+            $sql="update noder set  trackerKey=:trackerKey  where nodeId=:nodeId";
+            $arg=[
+                "trackerKey"=>$trakerKey,
+                "nodeId"=>$noderId
+            ];
+            if($db->update($sql,$arg)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+         public static function empetyTrakerKeyScan(){
+             $db=new nmysql();
+             //and noder.status='3
+             $sql="select * from noder,servers where noder.trackerKey is null and noder.servisId=servers.serverId and noder.status='3'";
+             foreach ($db->query($sql,"all") as $line){
+                 $requestUrl="http://".$line->serverIp.":".$line->port."/getTrackerKey/";
+                 $getTrakerData=json_decode(self::getUrl($requestUrl));
+                // print_r($getTrakerData);
+                 if($getTrakerData->message=='Success'){
+                     if(strlen($getTrakerData->value)>3){
+                         self::trakerKeyUpdate($line->nodeId,$getTrakerData->value);
+
+                     }
+
+                 }
+
+             }
+
+            // return $db->query($sql,"all");
+         }
          public static  function serverChangePool($serverId){
              $db =new nmysql();
              $sql="select * from noder where status='4' limit 0,10";
