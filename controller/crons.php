@@ -155,7 +155,7 @@ namespace crons{
                          sleep(2);
                          echo "\n <br> Nick Url = $SetNickNameUrl \n <br>";
                          if ($NickNameData->message == "Success") {
-                             $getTrakerUrl = $requestUrl . "/setDextracker/" . self::getTrakerNumber();
+                             $getTrakerUrl = $requestUrl . "/setDextracker/" . self::getTrakerNumber($nodeline->servisId);
                              $getTrakerData = json_decode(self::getUrl($getTrakerUrl));
                              echo "\n <br> trakaer Url = <a href='$getTrakerUrl'>$getTrakerUrl</a>  \n <br>";
                              if ($getTrakerData->message == "Success") {
@@ -505,7 +505,7 @@ namespace crons{
                              nmail::noIdleGeneralServer("$generalServer->serverId li genel server Dolur");
                          }
 
-                         print_R($nodeLine);
+                         //print_R($nodeLine);
 
                      }else{
                          echo "\n Boşta Normal Sunucu Yok \n";
