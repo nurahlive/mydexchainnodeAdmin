@@ -122,7 +122,7 @@ namespace crons{
                  $poolApikey = trim($getPoolKey->poolApiKey);
                  $poolApiId = $getPoolKey->masterPoolId;
 
-                 //exit();
+                 //exit();s
                  print_R($getPoolKey);
                  if ($getPoolKey->setupCount <=320) {
 
@@ -161,7 +161,7 @@ namespace crons{
                                      if ($prxMinerData->result = "000") {
                                          echo "prx added <br>";
                                          //  servis tamammi kontrol et
-                                         self::masterPoolSetupInc();
+                                         self::masterPoolSetupInc($poolApiId);
                                          // pool status  cahange  start;
 
                                      } else {
