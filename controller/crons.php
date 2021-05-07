@@ -25,24 +25,17 @@ namespace crons{
              //and noder.status='3
              $sql="select * from noder where trackerKey='0' and status='3'";
              $nodeData=$db->query($sql,"all");
-
              foreach ($nodeData as $line){
-
                   $server=self::getServer($line->serverId);
-
-
                  $requestUrl="http://".$server->serverIp.":".$line->port."/getTrackerKey/";
                  $getTrakerData=json_decode(self::getUrl($requestUrl));
-
                 // print_r($getTrakerData);
                  if($getTrakerData->message=='Success'){
                      if(strlen($getTrakerData->value)>3){
-                         print_R($getTrakerData);
-
-
+                      //   print_R($getTrakerData);
                          self::trakerKeyUpdate($line->nodeId,$getTrakerData->value);
-                         echo "test10";
-                         exit();
+                        // echo "test10";
+                        // exit();
 
                      }
 
