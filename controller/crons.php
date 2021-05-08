@@ -186,6 +186,7 @@ namespace crons{
                      echo " \n <br>   pool url : $poolJoinUrl \n <br>";
                      $poolData = json_decode(self::getUrl($poolJoinUrl));
                      if ($poolData->message == "Success") {
+                         echo "\n $poolApikey  pool key girildi \n";
 
                          $SetNickNameUrl = $requestUrl . "/setNickname/" . $nodeName;
 
