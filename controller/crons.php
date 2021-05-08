@@ -152,7 +152,7 @@ namespace crons{
          // noder active etme Start;
          public static  function onholdNodeActive(){
              $db= new nmysql();
-             $sql="select * from noder where status='1' limit 0,5";
+             $sql="select * from noder where status='1' limit 0,30";
              $OnholdActiveNode=$db->query($sql,"all");
 
              // print_R($OnholdActiveNode);
@@ -446,7 +446,7 @@ namespace crons{
          }
          public static function   OnholdDockerSetup(){
              $db= new nmysql();
-             $sql="select * from noder where status='0' limit 0,1";
+             $sql="select * from noder where status='0' limit 0,30";
              $onholdNode=$db->query($sql,"all");
              /*
                  [nodeId] => 1

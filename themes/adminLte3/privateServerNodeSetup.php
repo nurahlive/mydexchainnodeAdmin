@@ -125,9 +125,12 @@ control::loginControl();
       </div>
       <div class="form-group">
         <label>Kurulacak Özel Ürün</label>
+
+     
         <select name="productId" id="productId" class="form-control">
           <?
           foreach (nc::specialProductList() as $specialProduc) {
+
             echo ' <option value="'.$specialProduc->productId.'"> '.$specialProduc->productName.' ('.$specialProduc->DockerCount.')</option>';
           }
           ?>

@@ -6,3 +6,4 @@ host/*
 testDev/
 okex/
 sqladmin/
+olcLocalServer/
