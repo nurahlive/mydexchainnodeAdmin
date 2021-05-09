@@ -1,8 +1,15 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "controller/control.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "controller/data.php");
-use security\control,data\liste;
+require_once($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "controller/crons.php");
+use security\control,data\liste,crons\cronNoder;
 control::loginControl();
+
+ $pool=cronNoder::getActivePoolKey();
+   print_R($pool);
+
+
+exit();
 
 $test=array(
 

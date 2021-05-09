@@ -130,7 +130,8 @@ namespace crons{
           }
            public static  function getActivePoolKey(){
              $db=  new nmysql();
-             $sql="select * from masterTrakerPool where status='1' limit 0,1";
+            // $sql="select * from masterTrakerPool where status='1' limit 0,1";
+             $sql="select * from masterTrakerPool where status='1' ORDER BY RAND() limit 0,1";
              return $db->query($sql,"one");
            }
 
@@ -181,7 +182,7 @@ namespace crons{
                  echo "\n Node Name :$nodeName  \n <br>";
                  if ($controldata = self::getUrl($requestUrl)) {
                      sleep(2);
-                     //$poolApikey=self::MasterTrakerPoolapikey();
+
                      $poolJoinUrl = $requestUrl . "/setJoinPool/" . $poolApikey;
                      echo " \n <br>   pool url : $poolJoinUrl \n <br>";
                      $poolData = json_decode(self::getUrl($poolJoinUrl));
