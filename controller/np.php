@@ -47,7 +47,7 @@
                  }
 
              }else{ // master traker pool Kurulumu
-                 $normalContainerJson=self::manuelContainerJson(trim($data['startPort1']),trim($data['startPort2']),trim($data['startPort3']),trim($data['startPort4']),0,0,1024,0);
+                 $normalContainerJson=self::manuelContainerJson(trim($data['startPort1']),trim($data['startPort2']),trim($data['startPort3']),trim($data['startPort4']),0,0,1024,0,$data['containerimage']);
                  $dockerData = docker::containerCreate($conatinerName, $server->serverIp, $server->serverPort, json_encode(json_decode($normalContainerJson)));
 
                  if(!empty(json_decode($dockerData)->Id)){
@@ -390,7 +390,7 @@ values(:productName,:amount,:moneyType,:DockerCount,:periods,:status,:parexMinni
              return $db->query($sql,"all");
          }
          // docker jsons start;
-         public static function  manuelContainerJson($port1,$port2,$port3,$port4,$Memory=300000000,$memoryreservation=200000000,$CpuShares=512,$CpuQuota=6000){
+         public static function  manuelContainerJson($port1,$port2,$port3,$port4,$Memory=300000000,$memoryreservation=200000000,$CpuShares=512,$CpuQuota=6000,$containerImage='mydexchain/mydexchain:latest'){
              $json3='
 {
      
@@ -429,7 +429,7 @@ values(:productName,:amount,:moneyType,:DockerCount,:periods,:status,:parexMinni
 "Entrypoint":[
 "/startup.sh"
 ],
-"Image": "mydexchain/mydexchain:latest",
+"Image": "'.$containerImage.'",
 "Volumes":{
 "/etc/postgresql":{
 },

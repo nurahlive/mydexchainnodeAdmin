@@ -169,6 +169,11 @@ $productList=$db->query("select * from product","all");
         <input type="text" class="form-control" id="containerName" name="containerName" placeholder="Container İsmi">
       </div>
 
+      <div class="form-group">
+        <label>container image  (mydexchain/mydexchain:latest)</label>
+        <input type="text" class="form-control" id="containerimage" name="containerimage" placeholder="containerimage">
+      </div>
+
 
 
       <div class="form-group">
