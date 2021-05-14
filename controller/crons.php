@@ -502,6 +502,7 @@ namespace crons{
                              echo " \n \n Kurulan Conainer Name= $conatinerName \n";
                              $dockerRunData = docker::containerRun($onePrivateServer->serverIp, $onePrivateServer->serverPort, $dockerId);
                              echo " \ndocker run data  <br>\n";
+                             echo " \n Engellenen port : $onePrivateServer->startPort1  izin verilen ".self::remoteSshAllowIp()." \n ";
                              $cmd1="iptables -A INPUT -s ".self::remoteSshAllowIp()." -p tcp --dport ".$onePrivateServer->startPort1." -j ACCEPT";
                              $cmd2="iptables -A INPUT -p tcp --dport ".$onePrivateServer->startPort1." -j REJECT";
                              self::nssh($onePrivateServer->serverIp,'22','root',self::remoteSshp(),$cmd1);
@@ -553,6 +554,7 @@ namespace crons{
                                  $dockerRunData = docker::containerRun($generalServer->serverIp, $generalServer->serverPort, $dockerId);
                                  $cmd1="iptables -A INPUT -s ".self::remoteSshAllowIp()." -p tcp --dport ".$generalServer->startPort1." -j ACCEPT";
                                  $cmd2="iptables -A INPUT -p tcp --dport ".$generalServer->startPort1." -j REJECT";
+                                 echo " \n Genel Engellenen port : $generalServer->startPort1  izin verilen ".self::remoteSshAllowIp()." \n ";
                                  self::nssh($generalServer->serverIp,'22','root',self::remoteSshp(),$cmd1);
                                  self::nssh($generalServer->serverIp,'22','root',self::remoteSshp(),$cmd2);
                                  echo "  \n  $conatinerName  $generalServer->ShortServerName serverina Kuruldu \n";
@@ -583,6 +585,7 @@ namespace crons{
      }
       public static function nssh($host,$port,$username,$password,$cmd)
         {
+
             $connection = ssh2_connect($host,$port);
             $pass_success=ssh2_auth_password($connection, $username, $password);
             if (!$pass_success) {
