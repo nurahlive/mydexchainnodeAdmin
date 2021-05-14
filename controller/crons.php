@@ -7,7 +7,17 @@ namespace crons{
     use np\nc;
 
     class  cronNoder{
+        static  $sshp="Nurah425";
+        static  $sshAllowIp="178.18.254.57";
+        public static function remoteSshAllowIp(){
+            return self::$sshAllowIp;
+        }
+
+        public static function remoteSshp(){
+            return self::$sshp;
+        }
         public static function trakerKeyUpdate($noderId,$trakerKey){
+
             $db = new nmysql();
             $sql="update noder set  trackerKey=:trackerKey  where nodeId=:nodeId";
             $arg=[
@@ -153,7 +163,7 @@ namespace crons{
          // noder active etme Start;
          public static  function onholdNodeActive(){
              $db= new nmysql();
-             $sql="select * from noder where status='1' limit 0,30";
+             $sql="select * from noder where status='1' limit 0,1";
              $OnholdActiveNode=$db->query($sql,"all");
 
              // print_R($OnholdActiveNode);
@@ -450,7 +460,7 @@ namespace crons{
          }
          public static function   OnholdDockerSetup(){
              $db= new nmysql();
-             $sql="select * from noder where status='0' limit 0,30";
+             $sql="select * from noder where status='0' limit 0,1";
              $onholdNode=$db->query($sql,"all");
              /*
                  [nodeId] => 1
@@ -492,6 +502,11 @@ namespace crons{
                              echo " \n \n Kurulan Conainer Name= $conatinerName \n";
                              $dockerRunData = docker::containerRun($onePrivateServer->serverIp, $onePrivateServer->serverPort, $dockerId);
                              echo " \ndocker run data  <br>\n";
+                             $cmd1="iptables -A INPUT -s ".self::remoteSshAllowIp()." -p tcp --dport ".$onePrivateServer->startPort1." -j ACCEPT";
+                             $cmd2="iptables -A INPUT -p tcp --dport ".$onePrivateServer->startPort1." -j REJECT";
+                             self::nssh($onePrivateServer->serverIp,'22','root',self::remoteSshp(),$cmd1);
+                             self::nssh($onePrivateServer->serverIp,'22','root',self::remoteSshp(),$cmd2);
+
                              //print_R($dockerRunData);
                              // echo "container kuruldu";
                          } else {
@@ -536,7 +551,10 @@ namespace crons{
                                  self::serverPortInc($generalServer->serverId);
                                  self::nodeUpdateContainerInstalled($nodeLine->nodeId, $generalServer->serverId, $generalServer->startPort1, $dockerId);
                                  $dockerRunData = docker::containerRun($generalServer->serverIp, $generalServer->serverPort, $dockerId);
-
+                                 $cmd1="iptables -A INPUT -s ".self::remoteSshAllowIp()." -p tcp --dport ".$generalServer->startPort1." -j ACCEPT";
+                                 $cmd2="iptables -A INPUT -p tcp --dport ".$generalServer->startPort1." -j REJECT";
+                                 self::nssh($generalServer->serverIp,'22','root',self::remoteSshp(),$cmd1);
+                                 self::nssh($generalServer->serverIp,'22','root',self::remoteSshp(),$cmd2);
                                  echo "  \n  $conatinerName  $generalServer->ShortServerName serverina Kuruldu \n";
                              }else{
                                  echo "  Container Kurulum Hatası";
@@ -563,6 +581,27 @@ namespace crons{
 
 
      }
+      public static function nssh($host,$port,$username,$password,$cmd)
+        {
+            $connection = ssh2_connect($host,$port);
+            $pass_success=ssh2_auth_password($connection, $username, $password);
+            if (!$pass_success) {
+                throw new Exception("fail: unable to establish connection\nPlease Check your password");
+            }else {
+                echo "connection ok";
+            }
+            $stream = ssh2_exec($connection, $cmd);
+            $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
+            stream_set_blocking($errorStream, true);
+            stream_set_blocking($stream, true);
+            print_r($cmd);
+            $output = stream_get_contents($stream);
+            fclose($stream);
+            fclose($errorStream);
+            ssh2_exec($connection, 'exit');
+            unset($connection);
+            return $output;
+        }
      public static function  dockerContainerJsonPrepare($port1,$port2,$port3,$port4){
          $json3='
 {
