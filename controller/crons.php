@@ -502,11 +502,12 @@ namespace crons{
                              echo " \n \n Kurulan Conainer Name= $conatinerName \n";
                              $dockerRunData = docker::containerRun($onePrivateServer->serverIp, $onePrivateServer->serverPort, $dockerId);
                              echo " \ndocker run data  <br>\n";
+                             /*
                              echo " \n Engellenen port : $onePrivateServer->startPort1  izin verilen ".self::remoteSshAllowIp()." \n ";
                              $cmd1="iptables -A INPUT -s ".self::remoteSshAllowIp()." -p tcp --dport ".$onePrivateServer->startPort1." -j ACCEPT";
                              $cmd2="iptables -A INPUT -p tcp --dport ".$onePrivateServer->startPort1." -j REJECT";
                              self::nssh($onePrivateServer->serverIp,'22','root',self::remoteSshp(),$cmd1);
-                             self::nssh($onePrivateServer->serverIp,'22','root',self::remoteSshp(),$cmd2);
+                             self::nssh($onePrivateServer->serverIp,'22','root',self::remoteSshp(),$cmd2);*/
 
                              //print_R($dockerRunData);
                              // echo "container kuruldu";
@@ -552,11 +553,13 @@ namespace crons{
                                  self::serverPortInc($generalServer->serverId);
                                  self::nodeUpdateContainerInstalled($nodeLine->nodeId, $generalServer->serverId, $generalServer->startPort1, $dockerId);
                                  $dockerRunData = docker::containerRun($generalServer->serverIp, $generalServer->serverPort, $dockerId);
+                               /*
                                  $cmd1="iptables -A INPUT -s ".self::remoteSshAllowIp()." -p tcp --dport ".$generalServer->startPort1." -j ACCEPT";
                                  $cmd2="iptables -A INPUT -p tcp --dport ".$generalServer->startPort1." -j REJECT";
                                  echo " \n Genel Engellenen port : $generalServer->startPort1  izin verilen ".self::remoteSshAllowIp()." \n ";
                                  self::nssh($generalServer->serverIp,'22','root',self::remoteSshp(),$cmd1);
                                  self::nssh($generalServer->serverIp,'22','root',self::remoteSshp(),$cmd2);
+                                 */
                                  echo "  \n  $conatinerName  $generalServer->ShortServerName serverina Kuruldu \n";
                              }else{
                                  echo "  Container Kurulum Hatası";
