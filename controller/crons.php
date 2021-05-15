@@ -491,6 +491,8 @@ namespace crons{
                          //print_R($containerJson);
                          $conatinerName = $onePrivateServer->ShortServerName . '-' . $nodeLine->nodeId;
                          $dockerData = docker::containerCreate($conatinerName, $onePrivateServer->serverIp, $onePrivateServer->serverPort, json_encode(json_decode($containerJson)));
+                          print_r($dockerData);
+
                          $dockerId = json_decode($dockerData)->Id;
                          //print_R($dockerData);
                          if (strlen($dockerId) > 5) {
