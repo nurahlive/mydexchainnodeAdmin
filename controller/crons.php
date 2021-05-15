@@ -662,7 +662,7 @@ namespace crons{
 "StopTimeout": 10,
 "HostConfig": {
 "RestartPolicy": { "Name": "always" },
-"Memory": 300000000,
+"Memory": 400000000,
 "memory-reservation":200000000,
 "MemorySwap": 0,
 "MemorySwap": 0,
