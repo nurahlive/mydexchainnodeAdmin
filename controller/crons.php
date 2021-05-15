@@ -481,7 +481,7 @@ namespace crons{
                      $onePrivateServer = self::getpivateOneServer();
 
                      $serverUseNodeCount = self::serverUseNodeCount($onePrivateServer->serverId);
-                     echo "sucnu  :$onePrivateServer->serverIp";
+                     echo "sucnu  :$onePrivateServer->serverIp \n";
 
                      //print_R($onePrivateServer);
                      if(strlen(@$onePrivateServer->serverIp)>3){
