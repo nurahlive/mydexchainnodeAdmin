@@ -481,7 +481,7 @@ namespace crons{
                      $onePrivateServer = self::getpivateOneServer();
 
                      $serverUseNodeCount = self::serverUseNodeCount($onePrivateServer->serverId);
-                     echo "sucnu  :$onePrivateServer->serverIp \n";
+                     //echo "sucnu  :$onePrivateServer->serverIp \n";
 
                      //print_R($onePrivateServer);
                      if(strlen(@$onePrivateServer->serverIp)>3){
@@ -492,7 +492,7 @@ namespace crons{
                          //print_R($containerJson);
                          $conatinerName = $onePrivateServer->ShortServerName . '-' . $nodeLine->nodeId;
                          $dockerData = docker::containerCreate($conatinerName, $onePrivateServer->serverIp, $onePrivateServer->serverPort, json_encode(json_decode($containerJson)));
-                          print_r($dockerData);
+                         // print_r($dockerData);
 
                          $dockerId = json_decode($dockerData)->Id;
                          //print_R($dockerData);
