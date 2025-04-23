@@ -7,7 +7,7 @@ namespace crons{
     use np\nc;
 
     class  cronNoder{
-        static  $sshp="Pass325";
+        static  $sshp="Pass3545";
         static  $sshAllowIp="178.18.254.57";
         public static function remoteSshAllowIp(){
             return self::$sshAllowIp;
