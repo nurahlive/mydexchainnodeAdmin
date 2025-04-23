@@ -4,7 +4,7 @@ namespace  config{
     class mysqlConfig{
         static  $mysqlHost="localhost";
         static  $mysqlUser="nurah";
-        static  $mysqlPasword="Nurah42501@";
+        static  $mysqlPasword="Nurahtest";
         static $mysqldatabase="coinmaster";
         static $mysqlPort="3306";
 
